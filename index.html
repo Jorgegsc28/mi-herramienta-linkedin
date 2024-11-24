@@ -3,176 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario de Publicaciones</title>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        h1 {
-            color: #007bff;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        #calendar-container {
-            margin-top: 20px;
-        }
-
-        .legend {
-            text-align: left;
-            margin: 20px 0;
-        }
-
-        .legend span {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            margin-right: 5px;
-        }
-
-        .legend .recommended {
-            background-color: #cce5ff;
-            border: 1px solid #007bff;
-        }
-
-        .fc-recommended-slot {
-            background-color: #cce5ff !important;
-            border: none !important;
-        }
-
-        .fc-event {
-            background-color: #007bff !important;
-            color: white !important;
-            font-size: 0.9em;
-        }
-    </style>
+    <title>Mi Herramienta LinkedIn</title>
 </head>
 <body>
-    <div class="header">
-        <h1>Calendario de Publicaciones</h1>
-        <p>Organiza tus publicaciones de forma eficiente</p>
+    <h1>Organiza tus publicaciones de forma eficiente</h1>
+    
+    <!-- Botón de inicio de sesión con LinkedIn -->
+    <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77zushif04pk0x&redirect_uri=https://mi-herramienta-linkedin.vercel.app/callback&scope=r_liteprofile%20r_emailaddress%20w_member_social" style="padding: 10px 20px; background-color: #0077b5; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">
+        Inicia sesión con LinkedIn
+    </a>
+
+    <div id="calendar">
+        <!-- Aquí va el calendario existente -->
     </div>
-
-    <div class="container">
-        <h1>Temática: Transformación Digital</h1>
-        <div>
-            <ul>
-                <li>Cómo digitalizar procesos en 2024</li>
-                <li>Estrategias para la transformación digital</li>
-                <li>Tendencias en automatización industrial</li>
-                <li>Cómo usar la IA para optimizar negocios</li>
-                <li>El futuro del trabajo en un mundo digital</li>
-                <li>Casos de éxito en transformación digital</li>
-            </ul>
-        </div>
-        <div class="legend">
-            <p><span class="recommended"></span> Slot recomendado</p>
-        </div>
-        <div id="calendar-container">
-            <div id="calendar"></div>
-        </div>
-        <button onclick="authenticateWithLinkedIn()">Dejar programado en LinkedIn</button>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const calendarEl = document.getElementById("calendar");
-
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: "timeGrid",
-                slotMinTime: "08:00:00",
-                slotMaxTime: "18:00:00",
-                editable: true,
-                headerToolbar: {
-                    left: "",
-                    center: "title",
-                    right: ""
-                },
-                visibleRange: {
-                    start: "2024-11-17",
-                    end: "2024-11-30",
-                },
-                events: [
-                    { title: "Cómo digitalizar procesos en 2024", start: "2024-11-18T09:00:00" },
-                    { title: "Estrategias para la transformación digital", start: "2024-11-19T10:00:00" },
-                    { title: "Tendencias en automatización industrial", start: "2024-11-21T11:00:00" },
-                    { title: "Cómo usar la IA para optimizar negocios", start: "2024-11-23T14:00:00" },
-                    { title: "El futuro del trabajo en un mundo digital", start: "2024-11-25T16:00:00" },
-                    { title: "Casos de éxito en transformación digital", start: "2024-11-28T09:00:00" },
-                ],
-                eventBackgroundColor: "#007bff",
-                eventTextColor: "#ffffff",
-                eventOverlap: false
-            });
-
-            // Slots recomendados
-            const slotsRecomendados = [
-                { start: "2024-11-18T11:00:00", end: "2024-11-18T13:00:00" },
-                { start: "2024-11-20T14:00:00", end: "2024-11-20T16:00:00" },
-                { start: "2024-11-23T10:00:00", end: "2024-11-23T12:00:00" },
-                { start: "2024-11-25T09:00:00", end: "2024-11-25T11:00:00" },
-                { start: "2024-11-27T15:00:00", end: "2024-11-27T17:00:00" }
-            ];
-
-            slotsRecomendados.forEach(slot => {
-                calendar.addEvent({
-                    title: "Slot recomendado",
-                    start: slot.start,
-                    end: slot.end,
-                    display: "background",
-                    className: "fc-recommended-slot"
-                });
-            });
-
-            calendar.render();
-        });
-
-        function authenticateWithLinkedIn() {
-            const clientId = "TU_CLIENT_ID"; // Reemplaza con tu Client ID
-            const redirectUri = "http://localhost:3000/callback"; // Cambia por tu URL de redirección
-
-            const authUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
-                redirectUri
-            )}&scope=w_member_social`;
-
-            window.location.href = authUrl; // Redirige al usuario para autenticarse
-        }
-    </script>
 </body>
 </html>
-
